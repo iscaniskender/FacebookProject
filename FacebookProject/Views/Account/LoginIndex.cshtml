@@ -1,0 +1,148 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/js/LoginPage.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<link href="~/css/Login.css" rel="stylesheet" />
+
+
+<div id="navwrapper">
+    <div id="navbar">
+
+        <table class="tablewrapper">
+            <tr>
+                <td class="row1">Email</td>
+                <td class="row1">Password</td>
+            </tr>
+
+            <tr>
+
+                <td>
+                    <input type="text" id="UsernameLogin" name="UsernameLogin" class="inputtext" required>
+                </td>
+                <td>
+                    <input type="password" id="PasswordLogin" name="PasswordLogin" class="inputtext" required>
+                </td>
+                <td>
+                    <button style="display:block" type="submit" id="button" onclick="login()">Log In</button>
+                </td>
+
+            </tr>
+            <tr>
+                <td style="margin-left:25px;" class="row2 h">Forgot your password?</td>
+        </table>
+
+        <h1 class="logowrapper">facebook</h1>
+
+    </div>
+</div>
+
+<div id="contentwrapper" style=" height: 800px;">
+    <div id="content" style="display:flex; justify-content:space-between">
+
+        <div id="leftbod">
+
+            <div class="connect bolder">
+                Connect with friends and the
+                world around you on Facebook.
+            </div>
+
+            <div class="leftbar">
+                <img src="https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-xap1/t39.2365-6/851565_602269956474188_918638970_n.png" alt="" class="iconwrap fb1" />
+                <div class="fb1">
+                    <span class="rowtext">See photos and updates</span>
+                    <span class="rowtext2 fb1">from friends in News Feed</span>
+                </div>
+            </div>
+
+            <div class="leftbar">
+                <img src="https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-xap1/t39.2365-6/851585_216271631855613_2121533625_n.png" alt="" class="iconwrap fb1" />
+                <div class="fb1">
+                    <span class="rowtext">Share what's new</span>
+                    <span class="rowtext2 fb1">in your life on your timeline</span>
+                </div>
+            </div>
+
+            <div class="leftbar">
+                <img src="https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-xap1/t39.2365-6/851558_160351450817973_1678868765_n.png " alt="" class="iconwrap fb1" />
+                <div class="fb1">
+                    <span class="rowtext">Find more</span>
+                    <span class="rowtext2 fb1">of what you're looking for with graph search</span>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div id="rightbod">
+            <div id="alert">
+
+            </div>
+            <div class="signup bolder">Sign Up</div>
+            <div class="free bolder">It's free and always will be</div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="formbox">
+                <input type="text" class="inputbody in2" id="FullName" name="FullName" placeholder="Full Name" required>
+            </div>
+            <div class="formbox">
+                <input type="email" class="inputbody in2" id="Username" name="Username" placeholder="Email or mobile number" required>
+            </div>
+            <div class="formbox">
+                <input type="password" class="inputbody in2" id="Password" name="Password" placeholder="New password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Şifre en az 8 karakter, Bir büyük harf bir küçük harf ve bir noktalama işareti giriniz" required>
+            </div>
+            <div class="formbox">
+                <input type="password" class="inputbody in2" name="RePassword" placeholder="Re password" id="RePassword" onchange="isPasswordMatch()">
+            </div>
+            <div style="color:grey" id="divCheckPassword"></div>
+            <div class="formbox">
+                <input type="text" class="inputbody in2" id="PhoneNumber" name="PhoneNumber" placeholder="Phone Number">
+            </div>
+            <div class="formbox">
+                <input type="text" class="inputbody in2" id="LiveCity" name="LiveCity" placeholder="Live City">
+            </div>
+            <div class="formbox">
+                <input type="text" class="inputbody in2" id="HomeLand" name="HomeLand" placeholder="Homeland">
+            </div>
+            <div class="formbox">
+                @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <span>Profil Photo</span>
+                    <div id="photo-path"></div>
+                    <input type="file" id="profil" name="profil" class="form-control" />
+                    <input id="sendProfile" type="button" class="btn btn-success" value="Send File" onclick="addPhoto()" />
+                }
+            </div>
+            <div class="formbox">
+                @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <span>Background Image</span>
+                    <div id="photo-path2"></div>
+                    <input type="file" id="background" name="background" class="form-control" />
+                    <input id="sendBackground" type="button" class="btn btn-success" value="Send File" onclick="addBack()" />
+                }
+            </div>
+            <div class="formbox">
+                <div class="agree">
+                    By clicking Sign Up, you agree to our <div class="link">Terms</div> and that you have read our <div class="link">Data Use Policy</div>, including our <div class="link">Cookie Use</div>.
+                </div>
+            </div>
+            <div class="formbox">
+                <button type="submit" class="signbut bolder" onclick="control()">Sign Up</button>
+            </div>
+            <div class="formbox">
+                <div class="create"><div class="link h">Create a Page</div> for a celebrity, band or business.</div>
+            </div>
+
+        </div>
+        <script src="~/js/LoginPage.js"></script>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </div>
+</div>
+

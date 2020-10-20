@@ -1,0 +1,45 @@
+﻿@model PostuserModel;
+<script src="~/js/HomeIndex.js"></script>
+<div class="view create-post">
+    <div class="input">
+        <div class="user">
+            <div class="profile">
+                <img src="~/image/@Model.User.ProfilPhoto" />
+
+            </div>
+        </div>
+        <input type="text" placeholder="What on your mind, @Model.User.FullName  ?" name="post" id="post">
+        <input type="hidden" id="myBtn" onclick="postTweet(@Model.User.UserId)" value="@Model.User.UserId">
+    </div>
+    <div class="media">
+        <div class="category">
+            <div class="option">
+                <div class="icon">
+                    <img src="~/facebook-clone-master/img/icons/video-live.svg" />
+                </div>
+                <span>Live video</span>
+            </div>
+            <div class="option">
+
+                <div class="icon">
+                    <div class="image-upload">
+
+                        <label for="file-input">
+                            <img src="~/facebook-clone-master/img/icons/photos.svg" />
+                        </label>
+                        <input style="display:none" id="file-input" type="file" />
+                    </div>
+                </div>
+                <span>photo/video</span>
+            </div>
+
+            <div class="option">
+                <div class="icon">
+                    <img src="~/facebook-clone-master/img/icons/smile.svg" />
+                </div>
+                <span>feeling/activity</span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/HomeIndex.js"></script>

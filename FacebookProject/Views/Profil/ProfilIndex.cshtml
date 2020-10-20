@@ -1,0 +1,228 @@
+﻿@model PostuserModel;
+
+
+@{ ViewData["Title"] = "ProfilIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Facebook Profile Page UI Concept</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/brands.css" integrity="sha384-rf1bqOAj3+pw6NqYrtaE1/4Se2NBwkIfeYbsFdtiR6TQz0acWiwJbv1IM/Nt/ite" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/Profile.css" />
+    <link href="~/facebook-clone-master/css/style.css" rel="stylesheet" />
+    <link href="~/facebook-clone-master/css/owl.theme.default.css" rel="stylesheet" />
+    <link href="~/facebook-clone-master/css/owl.carousel.min.css" rel="stylesheet" />
+    <script src="~/js/Profil.js"></script>
+</head>
+<body>
+    <main>
+        <input id="userid" type="hidden" value=@Model.User.UserId>
+        <header style="background-color: rgb(3, 29, 46)">
+            <div class="tb">
+                <div class="td" id="logo">
+                    <a href="/Home/Index"><i class="fab fa-facebook-square"></i></a>
+                </div>
+                <div class="td" id="search-form">
+                    <form method="get" action="#">
+                        <input type="text" placeholder="Search Facebook">
+                        <button type="submit"><i class="material-icons">search</i></button>
+                    </form>
+                </div>
+                <div class="td" id="f-name-l"><span>@Model.User.FullName Profile</span></div>
+                <div class="td" id="i-links">
+                    <div class="tb">
+                        <div class="td" id="m-td">
+                            <div class="tb">
+                                <span class="td"><i class="material-icons">person_add</i></span>
+                                <span class="td"><i class="material-icons">chat_bubble</i></span>
+                                <span class="td m-active"><i class="material-icons">notifications</i></span>
+                            </div>
+                        </div>
+                        <div class="td">
+                            <a href="#" id="p-link">
+                                <img src="/image/@Model.User.ProfilPhoto">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div id="profile-upper">
+            <div id="profile-banner-image">
+                <img src="/image/@Model.User.BackgroundImage" />
+            </div>
+            <div id="profile-d">
+                <div id="profile-pic">
+                    <img src="~/image/@Model.User.ProfilPhoto" />
+                </div>
+                <div id="u-name">@Model.User.FullName</div>
+
+                <div class="tb" id="m-btns">
+                    <div class="td" style="text-decoration:none;">
+                        @if (ViewBag.UserType == "Guest")
+                        {
+            @if (ViewBag.NotFriends == "Pending")
+            {
+<div style="background-color:#E9EBEE;" class="m-btn"><span>Pendig friend Request</span></div> }
+else if (ViewBag.NotFriends == "True")
+{
+<script src="~/js/Profil.js"></script>
+
+                    <button type="submit" onclick="AddFriend('@Model.User.Username')" style=" color: black;
+        background-color: #E9EBEE;
+" id="addfirend">
+                        Add Friend
+                    </button> }
+                                    else
+                                    {
+                    <div style="background-color:#E9EBEE;" class="m-btn"><span>Friends</span></div>}}
+
+                    </div>
+                    <div class="td">
+                        <div class="m-btn"><i class="material-icons">lock</i><span>Privacy</span></div>
+                    </div>
+                </div>
+
+                <div id="edit-profile"><i class="material-icons">camera_alt</i></div>
+            </div>
+            <div id="black-grd"></div>
+        </div>
+        <div id="main-content" style=" background-color: rgb(3, 29, 46)">
+            <div class="tb">
+                <div class="td" id="l-col">
+                    <div class="l-cnt">
+                        <div class="cnt-label">
+                            <i class="l-i" id="l-i-i"></i>
+                            <span>Intro</span>
+                            <div class="lb-action"><i class="material-icons">edit</i></div>
+                        </div>
+                        <div id="i-box">
+                            <div id="intro-line">Web developer - UI</div>
+                            <div id="u-occ">Developing awesome UIs at <a href="#">Google LLC</a> Bengaluru and inspiring other companies to do so :)</div>
+                            <div id="u-loc"><i class="material-icons">location_on</i><a href="#">@Model.User.LiveCity</a>, <a href="#">@Model.User.Homeland</a></div>
+                        </div>
+                    </div>
+                    @if ((ViewBag.NotFriends != "True" && ViewBag.NotFriends != "Pending")||ViewBag.UserType!="Guest")
+                    {
+        <div class="l-cnt l-mrg">
+            <div class="cnt-label">
+                <i class="l-i" id="l-i-p"></i>
+                <span>Photos</span>
+                <div class="lb-action" id="b-i"><i class="material-icons">keyboard_arrow_down</i></div>
+            </div>
+            <div id="photos">
+                <div class="tb">
+                    <div class="tr">
+                        <div class="td"></div>
+                        <div class="td"></div>
+                        <div class="td"></div>
+                    </div>
+                    <div class="tr">
+                        <div class="td"></div>
+                        <div class="td"></div>
+                        <div class="td"></div>
+                    </div>
+                    <div class="tr">
+                        <div class="td"></div>
+                        <div class="td"></div>
+                        <div class="td"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                        <div class="l-cnt l-mrg">
+                            <div class="cnt-label">
+                                <i class="l-i" id="l-i-k"></i>
+                                <span>Did You Know<i id="k-nm">1</i></span>
+                            </div>
+                            <div>
+                                <div class="q-ad-c">
+                                    <a href="#" class="q-ad">
+                                        <img src="https://imagizer.imageshack.com/img923/1849/4TnLy1.png">
+                                        <span>My favorite superhero is...</span>
+                                    </a>
+                                </div>
+                                <div class="q-ad-c">
+                                    <a href="#" class="q-ad" id="add_q">
+                                        <i class="material-icons">add</i>
+                                        <span>Add Answer</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>}
+                    <div id="t-box">
+                        <a href="#">Privacy</a> <a href="#">Terms</a> <a href="#">Advertising</a> <a href="#">Ad Choices</a> <a href="#">Cookies</a> <span id="t-more">More<i class="material-icons">arrow_drop_down</i></span>
+                        <div id="cpy-nt">Facebook &copy; <span id="curr-year"></span></div>
+                    </div>
+                </div>
+                <div class="td" id="m-col">
+                    <div class="m-mrg" id="p-tabs">
+                        <div class="tb">
+                            <div class="td">
+                                <div class="tb" id="p-tabs-m">
+                                    <div class="td active"><i class="material-icons">av_timer</i><span>TIMELINE</span></div>
+                                    <div class="td"><i class="material-icons">people</i><span>FRIENDS</span></div>
+                                    <div class="td"><i class="material-icons">photo</i><span>PHOTOS</span></div>
+                                    <div class="td"><i class="material-icons">explore</i><span>ABOUT</span></div>
+                                    <div class="td"><i class="material-icons">archive</i><span>ARCHIVE</span></div>
+                                </div>
+                            </div>
+                            <div class="td" id="p-tab-m"><i class="material-icons">keyboard_arrow_down</i></div>
+                        </div>
+                    </div>
+                    @if ((ViewBag.NotFriends != "True" && ViewBag.NotFriends != "Pending") || ViewBag.UserType != "Guest")
+                    {
+                <partial name="_Post" />}
+
+                </div>
+                <div class="td" id="r-col">
+                    <div id="chat-bar">
+                        @if ((ViewBag.NotFriends != "True" && ViewBag.NotFriends != "Pending") || ViewBag.UserType != "Guest")
+                        {
+                    <div id="chat-lb"><i class="material-icons">contacts</i><span>Contacts</span></div>
+                                    <div id="cts">
+                                        <div class="on-ct active">
+                                            <a href="#"><img src="https://imagizer.imageshack.com/img924/4231/JnFicn.jpg"></a>
+                                        </div>
+                                        <div class="on-ct active">
+                                            <a href="#"><img src="https://imagizer.imageshack.com/img923/332/1abR4H.png"></a>
+                                        </div>
+                                        <div class="on-ct">
+                                            <a href="#"><img src="https://imagizer.imageshack.com/img924/4231/JnFicn.jpg"></a>
+                                        </div>
+                                        <div class="on-ct active">
+                                            <a href="#"><img src="https://imagizer.imageshack.com/img923/332/1abR4H.png"></a>
+                                        </div>
+                                        <div class="on-ct active">
+                                            <a href="#"><img src="https://imagizer.imageshack.com/img924/4231/JnFicn.jpg"></a>
+                                        </div>
+                                        <div class="on-ct">
+                                            <a href="#"><img src="https://imagizer.imageshack.com/img924/4231/JnFicn.jpg"></a>
+                                        </div>
+                                        <div class="on-ct">
+                                            <a href="#"><img src="https://imagizer.imageshack.com/img923/332/1abR4H.png"></a>
+                                        </div>
+                                        <div class="on-ct" id="ct-sett"><i class="material-icons">settings</i></div>
+                                    </div>}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <script>
+        var date = new Date();
+        document.getElementById('curr-year').innerHTML = date.getFullYear();
+    </script>
+    <script src="~/js/Profil.js"></script>
+</body>
+</html>
+
+

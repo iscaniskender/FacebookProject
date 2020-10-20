@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Cammon.DtoUser>
+
+@{
+    ViewData["Title"] = "DisplayRequestFriend";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/js/Profil.js"></script>
+<a  href="/Home/Index">
+    <img style="width:50px;"src="/facebook-clone-master/img/icons/facebook.svg" alt="">
+</a>
+<table class="table">
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th id='th-@item.UserId' class="notificationli list-group-item">
+                    <img class="mr-3" style="height:70px;width:70px; border-radius:50%" src="/image/@item.ProfilPhoto"> @item.FullName <a class="btn btn-primary btn-sm ml-4 mr-2" id="accept" onclick="KabulET(@item.UserId)" href="#">Kabul ET</a><a class="btn btn-danger btn-sm" id="reject" onclick="Reddet(@item.UserId)" href="#">Reddet</a>
+                </th>
+            </tr>
+        }
+
+    </tbody>
+</table>

@@ -1,0 +1,468 @@
+﻿@*@{ Layout = "~/Views/Shared/_Layout.cshtml"; }*@
+@model PostuserModel;
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook</title>
+    <link href="~/facebook-clone-master/css/style.css" rel="stylesheet" />
+    <link href="~/facebook-clone-master/css/owl.theme.default.css" rel="stylesheet" />
+    <script src="~/js/HomeIndex.js"></script>
+</head>
+
+<body>
+    <!--navbar-->
+    <nav>
+        <!--logo and search-->
+        <div class="left-side">
+            <div class="logo">
+                <a href="/Home/Index">
+                    <img src="/facebook-clone-master/img/icons/facebook.svg" alt="">
+                </a>
+            </div>
+
+            <form method="post" asp-action="Search" asp-controller="Home">
+                <div class="search">
+                    <input type="text" placeholder="Search Facebook" name="aranan" id="searchbox">
+                </div>
+            </form>
+        </div>
+
+        <!--tab icons-->
+        <div class="tabs">
+            <div class="tab-icon active">
+                <div class="icon">
+                    <img src="~/facebook-clone-master/img/icons/home.svg" />
+
+                </div>
+            </div>
+
+            <div class="tab-icon">
+                <div class="icon has-notification">
+                    <img src="~/facebook-clone-master/img/icons/flag.svg" />
+                </div>
+            </div>
+
+            <div class="tab-icon">
+                <div class="icon">
+
+                    <img src="~/facebook-clone-master/img/icons/tv.svg" />
+                </div>
+            </div>
+
+            <div class="tab-icon">
+                <div class="icon">
+                    <img src="~/facebook-clone-master/img/icons/users.svg" />
+                </div>
+            </div>
+
+
+            <div class="tab-icon">
+                <div class="icon has-notification">
+
+                    <img src="~/facebook-clone-master/img/icons/calendar.svg" />
+                </div>
+            </div>
+        </div>
+
+        <!--right side-->
+        <div class="right-side">
+            <div class="user">
+                <div class="profile">
+                   <img src="~/image/@Model.User.ProfilPhoto"/>
+                </div>
+                //<h4>@Model.User.FullName</h4>*
+            </div>
+
+            <!--icons-->
+            <div class="user-icons">
+                <div class="icon">
+
+                    <img src="~/facebook-clone-master/img/icons/plus.svg" />
+                </div>
+
+                <div class="icon has-notification">
+
+                    <img src="~/facebook-clone-master/img/icons/messenger.svg" />
+                </div>
+
+                <div class="icon">
+                    <a href="/Profil/DisplayRequestFriend" style="text-decoration:none">
+                        <img src="~/facebook-clone-master/img/icons/bell.svg" />
+                    </a>
+                    <span id="notification">@ViewBag.Count</span>
+                </div>
+              
+                <div class="icon">
+                    <a href="/Account/Logout">
+                        <img src="~/facebook-clone-master/img/icons/arrow.svg" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!--content-->
+    <div class="wrapper">
+        <div class="shortcuts">
+            <div class="first-col">
+                <div class="menu-item">
+                    <div class="user">
+                        <div class="profile">
+
+                            <img src="~/image/@Model.User.ProfilPhoto" />
+
+                        </div>
+                        <a style="text-decoration:none" href="/Profil/ProfilIndex/@Model.User.UserId"><h4>@Model.User.FullName</h4></a>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-row">
+                        <div class="icon">
+
+                            <img src="~/facebook-clone-master/img/icons/shield.svg" />
+                        </div>
+                        <h4>COVID-19 Infromation Center </h4>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-row">
+                        <div class="icon">
+                            <img src="~/facebook-clone-master/img/icons/colored-people.svg" />
+                        </div>
+                        <h4>Friends </h4>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-row">
+                        <div class="icon">
+                            <img src="~/facebook-clone-master/img/icons/messenger.svg" />
+                        </div>
+                        <h4>Messenger </h4>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-row">
+                        <div class="icon">
+
+                            <img src="~/facebook-clone-master/img/icons/colored-flag.svg" />
+                        </div>
+                        <h4>Pages </h4>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-row  ">
+                        <div class="icon more">
+                            <img src="~/facebook-clone-master/img/icons/arrow-down.svg" />
+                        </div>
+                        <h4>see more </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="second-col">
+
+                <h6 class="title">
+                    your shortcuts
+                </h6>
+                <div class="menu-item">
+                    <div class="item-row">
+                        <div class="icon">
+                            <img src="~/facebook-clone-master/img/stories/st-1.jpeg" />
+                        </div>
+                        <h4>Designers house </h4>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-row">
+                        <div class="icon">
+                            <img src="~/facebook-clone-master/img/stories/st-2.jpeg" />
+                        </div>
+                        <h4>Script house </h4>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-row">
+                            <div class="icon">
+                                <img src="~/facebook-clone-master/img/stories/page-1.jpg" />
+                            </div>
+                            <h4>ui ux Designers workshop </h4>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-row">
+                            <div class="icon">
+                                <img src="~/facebook-clone-master/img/stories/st-3.jpeg" />
+                            </div>
+                            <h4>netflix movies recommends </h4>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-row">
+                            <div class="icon">
+                                <img src="~/facebook-clone-master/img/stories/page-2.jpg" />
+                            </div>
+                            <h4>the futur </h4>
+                        </div>
+                    </div>
+
+
+                    <div class="menu-item">
+                        <div class="item-row">
+                            <div class="icon">
+                                <img src="~/facebook-clone-master/img/stories/page-3.jpeg" />
+                            </div>
+                            <h4>aj smart </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--posts-->
+        <div class="posts">
+            <!-- stories -->
+            <!--create post-->
+            <div class="timeline">
+                <div id="panel">
+                    <partial name="_CreatePost" />
+                </div>
+
+                <!--post container-->
+                <div id="panel2">
+                    <partial name="_Post"/>
+                </div>
+                 
+                <div style="visibility:hidden" id="photo-path"></div>
+                <!--people you may know-->
+                <div class="view friends smaller-margin">
+                    <div class="upper">
+                        <h6>people you may know</h6>
+                        <div class="dots">
+                            <div class="dot"></div>
+                        </div>
+                    </div>
+
+                    <div class="owl-carousel owl-theme people">
+                        <div class="item">
+                            <div class="person-img">
+                                <div class="icon">
+                                    &times;
+                                </div>
+                                <img src="~/facebook-clone-master/img/avatar/1.jpg" />
+                            </div>
+
+                            <div class="info">
+                                <h4>
+                                    rosie pie
+                                </h4>
+                                <span>4 mutual friend</span>
+                                <button>
+                                    add friend
+                                </button>
+                            </div>
+                        </div>
+                        <!---->
+
+                        <div class="item">
+                            <div class="person-img">
+                                <div class="icon">
+                                    &times;
+                                </div>
+                                <img src="~/facebook-clone-master/img/avatar/4.jpg" />
+                            </div>
+
+                            <div class="info">
+                                <h4>
+                                    sarah jones
+                                </h4>
+                                <span>4 mutual friend</span>
+                                <button>
+                                    add friend
+                                </button>
+                            </div>
+                        </div>
+                        <!---->
+
+                        <div class="item">
+                            <div class="person-img">
+                                <div class="icon">
+                                    &times;
+                                </div>
+                                <img src="~/facebook-clone-master/img/avatar/3.jpg" />
+                            </div>
+
+                            <div class="info">
+                                <h4>
+                                    chris doe
+                                </h4>
+                                <span>4 mutual friend</span>
+                                <button>
+                                    add friend
+                                </button>
+                            </div>
+                        </div>
+                        <!---->
+
+                        <div class="item">
+                            <div class="person-img">
+                                <div class="icon">
+                                    &times;
+                                </div>
+                                <img src="~/facebook-clone-master/img/avatar/2.jpg" />
+                            </div>
+
+                            <div class="info">
+                                <h4>
+                                    katie adam
+                                </h4>
+                                <span>4 mutual friend</span>
+                                <button>
+                                    add friend
+                                </button>
+                            </div>
+                        </div>
+                        <!---->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--shortcuts 2 -events and chat- -->
+        <div class="shortcuts shortcuts-2">
+            <div class="second-col first-col">
+                <div class="menu-item">
+                    <div class="upper">
+                        <h6>Your pages</h6>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-row">
+                        <div class="icon">
+                            <img src="~/facebook-clone-master/img/stories/st-2.jpeg" />
+                        </div>
+                        <h4>Script house </h4>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-row">
+                        <div class="icon">
+                            <img src="~/facebook-clone-master/img/stories/st-1.jpeg" />
+                        </div>
+                        <h4>omar ui design </h4>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="second-col">
+
+                <h6 class="title">
+                    birthdays
+                </h6>
+                <div class="menu-item">
+                    <div class="item-row">
+                        <div class="icon not-rounded">
+                            <img src="~/facebook-clone-master/img/icons/gift.svg" />
+                        </div>
+                        <h4>it's diana berry's birthday </h4>
+                    </div>
+                </div>
+                <div class="online">
+                    <h6 class="title">
+                        contact
+                    </h6>
+
+                    <div class="user">
+                        <div class="profile">
+                            <img src="~/facebook-clone-master/img/avatar/1.jpg" />
+                        </div>
+                        <h4>diana berry</h4>
+                    </div>
+
+                    <div class="user">
+                        <div class="profile">
+                            <img src="~/facebook-clone-master/img/avatar/4.jpg" />
+                        </div>
+                        <h4>rosie pie</h4>
+                    </div>
+
+                    <div class="user">
+                        <div class="profile">
+                            <img src="~/facebook-clone-master/img/avatar/2.jpg" />
+                        </div>
+                        <h4>samantha jones</h4>
+                    </div>
+
+                    <div class="user">
+                        <div class="profile">
+                            <img src="~/facebook-clone-master/img/avatar/3.jpg" />
+                        </div>
+                        <h4>john doe</h4>
+                    </div>
+
+                    <div class="user">
+                        <div class="profile">
+                            <img src="~/facebook-clone-master/img/avatar/4.jpg" />
+                        </div>
+                        <h4>stacy jr.</h4>
+                    </div>
+
+                    <div class="user">
+                        <div class="profile">
+                            <img src="~/facebook-clone-master/img/avatar/5.jpg" />
+                        </div>
+                        <h4>christin sam</h4>
+                    </div>
+
+                    <div class="user">
+                        <div class="profile">
+                            <img src="~/facebook-clone-master/img/avatar/6.jpg" />
+                        </div>
+                        <h4>kate simon</h4>
+                    </div>
+
+                    <div class="user">
+                        <div class="profile">
+                            <img src="~/facebook-clone-master/img/avatar/1.jpg" />
+                        </div>
+                        <h4>diana berry</h4>
+                    </div>
+
+                    <div class="user">
+                        <div class="profile">
+                            <img src="~/facebook-clone-master/img/avatar/2.jpg" />
+                        </div>
+                        <h4>sarah cerny</h4>
+                    </div>
+
+                    <div class="user">
+                        <div class="profile">
+                            <img src="~/facebook-clone-master/img/avatar/3.jpg" />
+                        </div>
+                        <h4>josh doe</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/HomeIndex.js"></script>
+</body>
+
+</html>

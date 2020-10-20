@@ -1,0 +1,242 @@
+﻿@model PostuserModel;
+<script src="https://kit.fontawesome.com/40c8bef9d8.js" crossorigin="anonymous"></script>
+<style>
+    .frame__container {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        width: 502px;
+        margin-top: 30px;
+        border: 1px solid #ced0d4;
+        border-radius: 5px;
+        background-color: #072a41;
+        box-sizing: border-box;
+    }
+
+    .frame__column {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .frame__headline {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 12px 12px 0;
+        margin-bottom: 11px;
+    }
+
+    .headline__image {
+        height: 40px;
+        width: 40px;
+        margin-right: 8px;
+    }
+
+    .headline__subtitle {
+        color: white;
+        font-size: 12px;
+        letter-spacing: -0.24px;
+        line-height: 16.08px;
+        margin: 0;
+    }
+
+    .headline__title {
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        letter-spacing: -0.24px;
+        line-height: 19.32px;
+        word-wrap: break-word;
+        margin: 0 0 2px;
+    }
+
+    .headline__world {
+        height: 12px;
+        width: 12px;
+    }
+
+    .frame__content {
+        margin: 7px 12px;
+    }
+
+    .frame__text {
+        margin: 0;
+    }
+
+    .frame__text--large {
+        margin: 0;
+        font-size: 24px;
+        line-height: 28px;
+    }
+
+    .frame__text--small {
+        margin: 0;
+        font-size: 14px;
+        line-height: 19.32px;
+        color: white;
+    }
+
+    .frame__footer {
+        display: flex;
+        border-top: 1px solid #e1e2e3;
+        padding: 4px 12px;
+    }
+
+    .text__social {
+        color: #7f7f7f;
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 14px;
+        margin: 0;
+    }
+
+    .footer__likes,
+    .footer__comments,
+    .footer__share,
+    .footer__post-as {
+        display: flex;
+        padding: 4px 0 4px;
+        margin-right: 20px;
+    }
+
+    .footer__image {
+        height: 14px;
+        margin: 0 6px -3px 0;
+    }
+
+    .footer__image--not-first {
+        margin-left: 9px;
+    }
+
+    .footer__post-as-image {
+        height: 16px;
+    }
+
+    .footer__post-as {
+        margin-right: 0;
+        margin-left: auto;
+    }
+</style>
+@foreach (var item in Model.posts)
+{
+    <div class="frame__container">
+        <div class="frame__headline">
+            <img class="headline__image" src="/image/@item.ProfilPhoto">
+            <div class="frame__column">
+                <p class="headline__title">
+                    @item.Name
+                </p>
+                <p class="headline__subtitle">
+                    @item.Createddate
+            </div>
+        </div>
+        <div class="frame__content">
+            <p class="frame__text--small">@item.Text</p>
+        </div>
+        @if (item.PostPhoto != null)
+        {
+            <div class="frame__content">
+                <img style="height:275px;width:475px;" class="frame__image" src="/image/@item.PostPhoto">
+            </div>
+        }
+    <div style="display:flex;justify-content:space-between;" class="frame__footer">
+      
+
+        @{
+            if (item.Likeactive == false)
+            {
+                <div onclick="AddPostLike(@item.Postid,@Model.User.UserId)" class="action">
+                    <div class="footer__likes">
+                        <i oncl style="color:white" class="fa fa-thumbs-up" aria-hidden="true"></i>
+                        <span style="color:white; margin-right:5px;margin-left:5px;">  @item.LikeCount  </span>
+                        <p style="margin-left:5px; margin-top:4px;" class="text__social">Like</p>
+                    </div>
+                </div>
+            }
+            if (item.Likeactive==true)
+            {
+                <div onclick="DeletePostLike(@item.Postid,@Model.User.UserId)" class="action">
+                    <div class="footer__likes">
+                        <i oncl style="color:darkseagreen" class="fa fa-thumbs-up" aria-hidden="true"></i>
+                        <span style="color:darkseagreen; margin-right:5px;margin-left:5px;">  @item.LikeCount  </span>
+                        <p style="margin-left:5px; margin-top:4px;" class="text__social">Like</p>
+                    </div>
+                </div>
+            }
+        }
+
+
+        <div class="footer__comments">
+            <i style="color:white" class="fas fa-comment"></i>
+            <p style="margin-left:5px; margin-top:2px;" class="text__social">Comment</p>
+        </div>
+        <div class="footer__share">
+            <i style="color:white" class="fas fa-share"></i>
+            <p style="margin-left:5px; margin-top:2px;" class="text__social">Share</p>
+        </div>
+    </div>
+    </div>
+}
+
+<script>
+    function AddPostLike(postid, userid) {
+        debugger;
+        console.log(postid);
+        console.log(userid);
+        let likeData = {
+            PostId: postid,
+            UserId: userid
+        }
+        $.ajax({
+            type: "POST",
+            data: likeData,
+            url: "/Post/Likeoperation",
+
+            success: function (response) {
+                refleshpostlist();
+                console.log("ilk");
+                $("#postData").html(response);
+                console.log("son");
+          
+            }
+        });
+    }
+
+    function DeletePostLike(postid, userid) {
+        debugger;
+
+        let deletelikeData = {
+            PostId: postid,
+            UserId: userid 
+        }
+
+        $.ajax({
+
+            type: "POST",
+            data: deletelikeData,
+            url: "/Post/Disslike",
+
+            success: function (response) {
+                refleshpostlist();
+                console.log("ilk");
+                $("#postData").html(response);
+                console.log("son");
+               
+            }
+        });
+    }
+
+    function refleshpostlist() {
+        debugger;
+        $.ajax({
+            type: "POST",
+            url: "/Home/RefleshPostList",
+            //data: { id: id },
+            dataType: "html",
+            success: function (data) {
+                $('#panel2').html(data);
+            },
+
+        });
+    }
+</script>

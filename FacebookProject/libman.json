@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "jquery@3.5.1",
+      "destination": "wwwroot/jquery/"
+    },
+    {
+      "library": "ajax@0.0.4",
+      "destination": "wwwroot/ajax/"
+    }
+  ]
+}
