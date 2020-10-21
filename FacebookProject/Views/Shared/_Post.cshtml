@@ -1,4 +1,5 @@
 ﻿@model PostuserModel;
+
 <script src="https://kit.fontawesome.com/40c8bef9d8.js" crossorigin="anonymous"></script>
 <style>
     .frame__container {
@@ -119,31 +120,29 @@
 </style>
 @foreach (var item in Model.posts)
 {
-    <div class="frame__container">
-        <div class="frame__headline">
-            <img class="headline__image" src="/image/@item.ProfilPhoto">
-            <div class="frame__column">
-                <p class="headline__title">
-                    @item.Name
-                </p>
-                <p class="headline__subtitle">
-                    @item.Createddate
-            </div>
+<div class="frame__container">
+    <div class="frame__headline">
+        <img class="headline__image" src="/image/@item.ProfilPhoto">
+        <div class="frame__column">
+            <p class="headline__title">
+                @item.Name
+            </p>
+            <p class="headline__subtitle">
+                @item.Createddate
         </div>
+    </div>
+    <div class="frame__content">
+        <p class="frame__text--small">@item.Text</p>
+    </div>
+    @if (item.PostPhoto != null)
+    {
         <div class="frame__content">
-            <p class="frame__text--small">@item.Text</p>
-        </div>
-        @if (item.PostPhoto != null)
-        {
-            <div class="frame__content">
-                <img style="height:275px;width:475px;" class="frame__image" src="/image/@item.PostPhoto">
-            </div>
-        }
-    <div style="display:flex;justify-content:space-between;" class="frame__footer">
-      
+            <img style="height:275px;width:475px;" class="frame__image" src="/image/@item.PostPhoto">
+        </div>}
+    <div style="display:flex;justify-content:space-between;margin-left:10px;" class="frame__footer;">
 
-        @{
-            if (item.Likeactive == false)
+
+        @{ if (item.Likeactive == false)
             {
                 <div onclick="AddPostLike(@item.Postid,@Model.User.UserId)" class="action">
                     <div class="footer__likes">
@@ -151,9 +150,8 @@
                         <span style="color:white; margin-right:5px;margin-left:5px;">  @item.LikeCount  </span>
                         <p style="margin-left:5px; margin-top:4px;" class="text__social">Like</p>
                     </div>
-                </div>
-            }
-            if (item.Likeactive==true)
+                </div> }
+            if (item.Likeactive == true)
             {
                 <div onclick="DeletePostLike(@item.Postid,@Model.User.UserId)" class="action">
                     <div class="footer__likes">
@@ -161,11 +159,7 @@
                         <span style="color:darkseagreen; margin-right:5px;margin-left:5px;">  @item.LikeCount  </span>
                         <p style="margin-left:5px; margin-top:4px;" class="text__social">Like</p>
                     </div>
-                </div>
-            }
-        }
-
-
+                </div> } }
         <div class="footer__comments">
             <i style="color:white" class="fas fa-comment"></i>
             <p style="margin-left:5px; margin-top:2px;" class="text__social">Comment</p>
@@ -175,9 +169,36 @@
             <p style="margin-left:5px; margin-top:2px;" class="text__social">Share</p>
         </div>
     </div>
-    </div>
-}
+    {@foreach (Cammon.Dtos.DtoComment item2 in item.comments)
+    {
+        <div style="margin-left:50px;background-color: #1A4464; border: solid white; margin-bottom:5px;">
+            <div class="frame__headline">
+                <img class="headline__image" src="/image/@item2.Photo">
+                <div class="frame__column">
+                    <p class="headline__title">
+                        @item2.Fullname
+                    </p>
+                </div>
+            </div>
+            <div class="frame__content">
+                <p class="frame__text--small">@item2.Description</p>
+            </div>
+        </div>
+    }
+    <div class="view create-post" style="margin-top:0px; margin-bottom:15px;">
+        <div class="input">
+            <div class="user">
+                <div class="profile">
+                    <img src="~/image/@Model.User.ProfilPhoto" />
 
+                </div>
+            </div>
+            <input type="text" onclick="sendcomment(@item.Postid,@Model.User.UserId)" placeholder="What on your mind, @Model.User.FullName  ?" name="post" id="comment@(item.Postid)">
+        </div>
+       
+    </div>
+</div>}
+}
 <script>
     function AddPostLike(postid, userid) {
         debugger;
@@ -197,7 +218,7 @@
                 console.log("ilk");
                 $("#postData").html(response);
                 console.log("son");
-          
+
             }
         });
     }
@@ -207,7 +228,7 @@
 
         let deletelikeData = {
             PostId: postid,
-            UserId: userid 
+            UserId: userid
         }
 
         $.ajax({
@@ -221,7 +242,7 @@
                 console.log("ilk");
                 $("#postData").html(response);
                 console.log("son");
-               
+
             }
         });
     }
@@ -238,5 +259,35 @@
             },
 
         });
+    }
+
+    function sendcomment(postid, userid) {
+        debugger;
+        console.log("calıştı");
+        console.log(postid);
+        console.log(userid);
+        var input = document.getElementById("comment" + postid);
+        input.addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                let commentText = $("#" + "comment" + postid).val();
+
+                let commentData = {
+                    Description: commentText,
+                    UserId: userid,
+                    PostId: postid
+                };
+
+                $.ajax({
+                    method: "POST",
+                    url: "/Home/SendComment",
+                    data: commentData,
+                    success: function (response) {
+                        refleshpostlist();
+                        $("#panel2").html(response);
+                    }
+                })
+            }
+        });
+
     }
 </script>

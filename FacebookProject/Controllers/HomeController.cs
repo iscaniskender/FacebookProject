@@ -26,10 +26,12 @@ namespace FacebookProject.Controllers
         UserMenager UserM = new UserMenager();
         PostMenager PosM = new PostMenager();
         ConnectionMenager ConnM = new ConnectionMenager();
+        CommentMenager comm = new CommentMenager();
         public IActionResult Index()
         {
             var owneresult = UserM.GetDtoUser(User.Identity.Name);
             var count = ConnM.FriendCount(owneresult.UserId);
+            
             ViewBag.Count = count;
 
             var postlist = ConnM.GetFriendsConn(owneresult.UserId);
@@ -89,7 +91,11 @@ namespace FacebookProject.Controllers
 
 
         }
-
+        public IActionResult SendComment(DtoComment commentDto)
+        {
+            comm.AddComment(commentDto);
+            return Json(true);
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

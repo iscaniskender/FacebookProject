@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
@@ -120,12 +121,12 @@ namespace BLL.Concrete
             {
                 DtoUser user2 = new DtoUser();
                 user2.UserId = item.UserIdOne;
-                userid.Add(user2);       
+                userid.Add(user2);
             }
             DtoUser user = new DtoUser();
             user.UserId = id;
             userid.Add(user);
-            
+
 
             List<DtoUser> users = new List<DtoUser>();
 
@@ -148,8 +149,9 @@ namespace BLL.Concrete
 
                 foreach (var posts in gelen)
                 {
+                    List<DtoComment> commenDtoList = new List<DtoComment>();
                     PostTweetsUsers post = new PostTweetsUsers();
-                    post.Likeactive = posts.Likes.Any(x => x.IsActive ==true);
+                    post.Likeactive = posts.Likes.Any(x => x.IsActive == true);
                     post.Shareactive = posts.Shares.Any(x => x.IsActive == true);
                     post.UserId = item.UserId;
                     post.Name = item.FullName;
@@ -161,12 +163,33 @@ namespace BLL.Concrete
                     post.Text = posts.Description;
                     post.Createddate = posts.CreatedDate;
                     post.LikeCount = posts.Likes.Where(x => x.IsDeleted == false && x.IsActive == true).Count();
-                    post.ShareCount= posts.Likes.Where(x => x.IsDeleted == false && x.IsActive == true).Count();
-                    post.ReplyCount= posts.Comments.Where(x => x.IsDeleted == false && x.IsActive == true).Count(); 
+                    post.ShareCount = posts.Likes.Where(x => x.IsDeleted == false && x.IsActive == true).Count();
+                    post.ReplyCount = posts.Comments.Where(x => x.IsDeleted == false && x.IsActive == true).Count();
+
+
+                    var result = context.comments.Where(x => x.PostId == posts.Id).ToList();
+                    if (result != null)
+                    {
+                        foreach (var item2 in result)
+                        {
+                            DtoComment comment = new DtoComment();
+                           
+                            comment.Description = item2.Description;
+                            comment.UserId = item2.UserId;
+                            comment.PostId = item2.PostId;
+                            comment.IsActive = item2.IsActive;
+                            comment.IsDeleted = item2.IsDeleted;
+                            comment.Photo = userM.GetDtoUserbyId(item2.UserId).ProfilPhoto;
+                            comment.Fullname = userM.GetDtoUserbyId(item2.UserId).FullName;
+
+                            commenDtoList.Add(comment);
+                        }
+                    }
+                    post.comments = commenDtoList;
                     ptu.Add(post);
-                }      
+                }
             }
-            return ptu.OrderByDescending(x=>x.Createddate).ToList() ;
+            return ptu.OrderByDescending(x => x.Createddate).ToList();
         }
     }
 }

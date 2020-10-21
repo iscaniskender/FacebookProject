@@ -25,5 +25,6 @@ namespace Cammon.Dtos
 
         public bool Shareactive { get; set; }
         public int ReplyCount { get; set; }
+        public List<DtoComment> comments { get; set; }
     }
 }
